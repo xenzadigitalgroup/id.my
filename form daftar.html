@@ -62,14 +62,75 @@
       <input type="text" id="kodeposDomisili" name="kodeposDomisili">
     </div>
 
-    <label for="jenisPendaftaran">Jenis Pendaftaran:</label>
-    <select id="jenisPendaftaran" name="jenisPendaftaran" required>
-      <option value="" disabled selected>Pilih Jenis Pendaftaran</option>
-      <option value="magang">Daftar Magang</option>
-      <option value="kerja">Daftar Kerja</option>
-      <option value="creditX">Program Credit X Xenza Pay</option>
-      <option value="reseller">Program Reseller</option>
+    <label for="negara">Negara:</label>
+    <select id="negara" name="negara" onchange="checkNegara()">
+      <option value="indonesia">Indonesia</option>
+      <option value="malaysia">Malaysia</option>
     </select>
+
+    <div id="formIndonesia">
+      <label for="jenisPendaftaran">Jenis Pendaftaran:</label>
+      <select id="jenisPendaftaran" name="jenisPendaftaran" onchange="checkJenisPendaftaran()" required>
+        <option value="" disabled selected>Pilih Jenis Pendaftaran</option>
+        <option value="magang">Daftar Magang</option>
+        <option value="kerja">Daftar Kerja</option>
+        <option value="creditX">Program Credit X Xenza Pay</option>
+        <option value="reseller">Program Reseller</option>
+      </select>
+
+      <div id="formPekerjaan" style="display: none;">
+        <label for="pekerjaan">Pekerjaan:</label>
+        <select id="pekerjaan" name="pekerjaan">
+          <option value="guru">Pilih disini</option>
+          <option value="guru">Guru</option>
+          <option value="dokter">Dokter</option>
+          <option value="pelajar">Pelajar/Mahasiswa</option>
+          <option value="karyawan_swasta">Karyawan Swasta</option>
+          <option value="wirausaha">Wirausaha</option>
+          <option value="pns">PNS (Pegawai Negeri Sipil)</option>
+          <option value="polisi">Polisi</option>
+          <option value="tukang">Tukang</option>
+          <option value="penyiar_radio_tv">Penyiar Radio/TV</option>
+          <option value="arsitek">Arsitek</option>
+          <option value="petani">Petani</option>
+          <option value="nelayan">Nelayan</option>
+          <option value="pilot">Pilot</option>
+          <option value="desainer">Desainer</option>
+          <option value="teknisi_komputer">Teknisi Komputer</option>
+          <option value="montir">Montir</option>
+          <option value="pengacara">Pengacara</option>
+          <option value="dosen">Dosen</option>
+          <option value="peneliti">Peneliti</option>
+          <option value="pedagang">Pedagang</option>
+          <option value="lainnya">Lainnya</option>
+        </select>
+
+        <div id="lainnyaPekerjaan" style="display: none;">
+          <label for="pekerjaanLainnya">Pekerjaan Lainnya:</label>
+          <input type="text" id="pekerjaanLainnya" name="pekerjaanLainnya">
+        </div>
+      </div>
+    </div>
+
+    <div id="formMalaysia" style="display: none;">
+      <label for="nameMalaysia">Name:</label>
+      <input type="text" id="nameMalaysia" name="nameMalaysia" required>
+
+      <label for="addressMalaysia">Address:</label>
+      <input type="text" id="addressMalaysia" name="addressMalaysia" required>
+
+      <label for="workMalaysia">Work:</label>
+      <input type="text" id="workMalaysia" name="workMalaysia" required>
+
+      <label for="birthdateMalaysia">Date of Birth:</label>
+      <input type="date" id="birthdateMalaysia" name="birthdateMalaysia" required>
+
+      <label for="ageMalaysia">Age:</label>
+      <input type="number" id="ageMalaysia" name="ageMalaysia" required>
+
+      <label for="idNumberMalaysia">ID Number:</label>
+      <input type="text" id="idNumberMalaysia" name="idNumberMalaysia" required>
+    </div>
 
     <button type="submit">Kirim</button>
   </form>
@@ -78,7 +139,6 @@
     function prepareEmail(event) {
       event.preventDefault();
 
-      // Ambil nilai dari formulir
       const name = document.getElementById('name').value;
       const ktp = document.getElementById('ktp').value;
       const npwp = document.getElementById('npwp').value;
@@ -98,20 +158,36 @@
         alamatContent += `\n\nAlamat Domisili: ${alamatDomisili}\nKota Domisili: ${kotaDomisili}\nKode Pos Domisili: ${kodeposDomisili}`;
       }
 
-      const jenisPendaftaran = document.getElementById('jenisPendaftaran').value;
+      const negara = document.getElementById('negara').value;
 
-      // Buat isi email
-      const emailContent = `Nama Pendaftar: ${name}\nNo KTP: ${ktp}\nNo NPWP: ${npwp}\nNo HP/WhatsApp: ${hp}\nTanggal Lahir: ${birthdate}\nUmur: ${age}${alamatContent}\nJenis Pendaftaran: ${jenisPendaftaran}`;
+      let emailContent = `Nama Pendaftar: ${name}\nNo KTP: ${ktp}\nNo NPWP: ${npwp}\nNo HP/WhatsApp: ${hp}\nTanggal Lahir: ${birthdate}\nUmur: ${age}${alamatContent}\nNegara: ${negara}`;
 
-      // Buka aplikasi email
+      if (negara === 'indonesia') {
+        const jenisPendaftaran = document.getElementById('jenisPendaftaran').value;
+        emailContent += `\nJenis Pendaftaran: ${jenisPendaftaran}`;
+
+        if (jenisPendaftaran === 'creditX') {
+          const pekerjaan = document.getElementById('pekerjaan').value;
+          const pekerjaanLainnya = document.getElementById('pekerjaanLainnya').value;
+
+          emailContent += `\nPekerjaan: ${pekerjaan === 'lainnya' ? pekerjaanLainnya : pekerjaan}`;
+        }
+      } else if (negara === 'malaysia') {
+        const nameMalaysia = document.getElementById('nameMalaysia').value;
+        const addressMalaysia = document.getElementById('addressMalaysia').value;
+        const workMalaysia = document.getElementById('workMalaysia').value;
+        const birthdateMalaysia = document.getElementById('birthdateMalaysia').value;
+        const ageMalaysia = document.getElementById('ageMalaysia').value;
+        const idNumberMalaysia = document.getElementById('idNumberMalaysia').value;
+
+        emailContent += `\nName (Malaysia): ${nameMalaysia}\nAddress (Malaysia): ${addressMalaysia}\nWork (Malaysia): ${workMalaysia}\nDate of Birth (Malaysia): ${birthdateMalaysia}\nAge (Malaysia): ${ageMalaysia}\nID Number (Malaysia): ${idNumberMalaysia}`;
+      }
+
       openEmailApp(emailContent);
     }
 
     function openEmailApp(content) {
-      // Format URL mailto dengan subject dan body
       const emailUrl = `mailto:xenzadigital@gmail.com?subject=Formulir Pendaftaran&body=${encodeURIComponent(content)}`;
-
-      // Buka aplikasi email pada perangkat pengguna
       window.location.href = emailUrl;
     }
 
@@ -119,6 +195,45 @@
       const alamatForm = document.getElementById('alamatForm');
       alamatForm.style.display = alamatForm.style.display === 'none' ? 'block' : 'none';
     }
+
+    function checkNegara() {
+      const negara = document.getElementById('negara').value;
+      const formIndonesia = document.getElementById('formIndonesia');
+      const formMalaysia = document.getElementById('formMalaysia');
+
+      if (negara === 'indonesia') {
+        formIndonesia.style.display = 'block';
+        formMalaysia.style.display = 'none';
+      } else if (negara === 'malaysia') {
+        formIndonesia.style.display = 'none';
+        formMalaysia.style.display = 'block';
+      }
+    }
+
+    function checkJenisPendaftaran() {
+      const jenisPendaftaran = document.getElementById('jenisPendaftaran').value;
+      const formPekerjaan = document.getElementById('formPekerjaan');
+      const lainnyaPekerjaan = document.getElementById('lainnyaPekerjaan');
+
+      if (jenisPendaftaran === 'creditX') {
+        formPekerjaan.style.display = 'block';
+      } else {
+        formPekerjaan.style.display = 'none';
+        lainnyaPekerjaan.style.display = 'none';
+      }
+    }
+
+    document.getElementById('pekerjaan').addEventListener('change', function() {
+      const lainnyaPekerjaan = document.getElementById('lainnyaPekerjaan');
+      const pekerjaanLainnya = document.getElementById('pekerjaanLainnya');
+
+      if (this.value === 'lainnya') {
+        lainnyaPekerjaan.style.display = 'block';
+      } else {
+        lainnyaPekerjaan.style.display = 'none';
+        pekerjaanLainnya.value = '';
+      }
+    });
   </script>
 </body>
 </html>
