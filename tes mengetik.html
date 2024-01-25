@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDENT AREA</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f5f5f5; /* Warna latar belakang */
+    }
+
+    header {
+      background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
+      padding: 10px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
+      position: relative;
+      header {
+  /* ... (Bagian CSS lainnya tetap sama) */
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      color: white;
+      font-size: 14px;
+    }
+
+    nav {
+      margin: 10px 0;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 10px;
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333; /* Warna teks hitam */
+      border: 2px solid #87CEEB; /* Warna border sesuai dengan background header */
+      border-radius: 8px; /* Sudut sedikit melengkung */
+      transition: background-color 0.3s, box-shadow 0.3s; /* Transisi pada warna latar dan bayangan */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan awal */
+      font-family: 'Anonymous Pro', monospace;
+    }
+
+    nav a:hover {
+      background-color: #87CEEB; /* Warna background saat diarahkan */
+      color: white;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Bayangan saat dihover */
+    }
+
+    .burger-icon {
+      display: none; /* Sembunyikan ikon burger pada tampilan desktop */
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    .burger-icon div {
+      width: 30px;
+      height: 3px;
+      background-color: white; /* Warna putih pada ikon burger */
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    .burger-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s, transform 0.5s; /* Tambahkan transisi untuk opasitas dan transform */
+  }
+
+  .burger-menu.open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+    .burger-menu a {
+      display: block;
+      margin: 5px 0;
+      text-decoration: none;
+      color: #333;
+      font-family: 'Anonymous Pro', monospace;
+      border: 1px solid #87CEEB;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    #language-select,
+    #results {
+      margin-bottom: 20px;
+    }
+
+    #typing-text {
+      font-size: 18px;
+      margin-bottom: 20px;
+      width: 80%;
+      margin: 20px auto;
+      border: 1px solid #87CEEB; /* Warna border */
+      border-radius: 8px; /* Sudut sedikit melengkung */
+      padding: 10px;
+      background-color: white;
+    }
+
+    #input-box {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      margin: 0 auto;
+      border: 1px solid #87CEEB; /* Warna border */
+      border-radius: 8px; /* Sudut sedikit melengkung */
+      padding: 10px;
+      background-color: white;
+    }
+
+    #timer {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    #errors-table {
+      margin: 20px auto;
+      width: 80%;
+      border-collapse: collapse;
+    }
+
+    #errors-table th, #errors-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      border-radius: 8px; /* Sudut sedikit melengkung */
+      background-color: white;
+    }
+
+    #start-button,
+    #restart-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
+      color: white;
+      border: none;
+      border-radius: 8px; /* Sudut sedikit melengkung */
+      margin: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s; /* Transisi pada warna latar dan bayangan */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan awal */
+      font-family: 'Anonymous Pro', monospace;
+    }
+
+    #start-button:disabled,
+    #restart-button:disabled {
+      background-color: #ddd;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    #results {
+      background-color: #f9f9f9; /* Warna abu-abu muda */
+      padding: 20px;
+      border-radius: 15px; /* Sudut sedikit melengkung */
+    }
+
+    /* Tampilan mobile */
+    @media only screen and (max-width: 600px) {
+      nav a {
+        display: none; /* Sembunyikan tombol pada tampilan mobile */
+      }
+
+      .burger-icon {
+        display: block; /* Tampilkan ikon burger pada tampilan mobile */
+      }
+
+      .burger-icon.open div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .burger-icon.open div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger-icon.open div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      .burger-menu.open {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="burger-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <h1>Tes Mengetik</h1>
+    <p>&copy; 2024 XENZA DIGITAL GROUP</p>
+    <nav>
+      <a href="tes mengetik.html">Tes Mengetik</a>
+      <a href="kalkulator.html">Kalkulator</a>
+      <a href="tes koding.html">Tes Coding</a>
+      <a href="#">Tes Bahasa</a>
+    </nav>
+    <nav class="burger-menu" id="burgerMenu">
+      <a href="tes mengetik.html">Tes Mengetik</a>
+      <a href="kalkulator.html">Kalkulator</a>
+      <a href="tes koding.html">Tes Coding</a>
+      <a href="#">Tes Bahasa</a>
+    </nav>
+  </header>
+
+  <div id="language-select">
+    <label for="language">Pilih Bahasa:</label>
+    <select id="language" onchange="changeLanguage()">
+      <option value="id">Bahasa Indonesia</option>
+      <option value="en">English</option>
+      <option value="ms">Bahasa Malaysia</option>
+      <option value="zh">中文 (Bahasa Cina)</option>
+      <option value="ja">日本語 (Bahasa Jepang)</option>
+      <option value="ar">العربية (Bahasa Arab)</option>
+      <option value="ko">한국어 (Bahasa Korea)</option>
+    </select>
+  </div>
+
+  <button id="start-button" onclick="startTest()">Mulai</button>
+
+  <div id="typing-text"></div>
+
+  <textarea id="input-box" oninput="checkTyping()" placeholder="Ketik di sini..." disabled></textarea>
+
+  <div id="timer">Waktu: 01:00</div>
+
+  <table id="errors-table">
+    <thead>
+      <tr>
+        <th>Kata yang Benar</th>
+        <th>Kata yang Ditulis</th>
+        <th>Benar atau Salah</th>
+      </tr>
+    </thead>
+    <tbody id="errors-body"></tbody>
+  </table>
+
+  <div id="results"></div>
+
+  <button id="restart-button" onclick="restartTest()" disabled>Mulai Lagi</button>
+
+  <script>
+    let language = 'id'; // default language is Indonesian
+    let text = getText();
+    let startTime;
+    let timer;
+    let errorCount = 0;
+    let isTimeUp = false;
+
+    function changeLanguage() {
+      language = document.getElementById('language').value;
+      text = getText();
+      document.getElementById('typing-text').textContent = text;
+    }
+
+    function getText() {
+      const texts = {
+        id: [
+          'Pemanasan global adalah masalah serius yang memengaruhi kehidupan di bumi. Diperkirakan bahwa aktivitas manusia, seperti pembakaran bahan bakar fosil, menjadi penyebab utama pemanasan global.',
+          'Penting untuk mengurangi emisi gas rumah kaca agar dapat memperlambat pemanasan global. Penanaman pohon, efisiensi energi, dan penggunaan sumber energi terbarukan adalah langkah-langkah penting yang bisa diambil untuk mengatasi masalah ini.'
+        ],
+        en: [
+          'Global warming is a serious issue affecting life on Earth. It is estimated that human activities, such as the burning of fossil fuels, are the main cause of global warming.',
+          'It is crucial to reduce greenhouse gas emissions to slow down global warming. Planting trees, improving energy efficiency, and using renewable energy sources are important steps that can be taken to address this issue.'
+        ],
+        ms: [
+          'Pemanasan global adalah isu serius yang mempengaruhi kehidupan di bumi. Diperkirakan aktiviti manusia, seperti pembakaran bahan bakar fosil, adalah penyebab utama pemanasan global.',
+          'Penting untuk mengurangkan emisi gas rumah hijau untuk memperlambat pemanasan global. Penanaman pokok, peningkatan kecekapan tenaga, dan penggunaan sumber tenaga boleh diperbaharui adalah langkah-langkah penting yang boleh diambil untuk mengatasi masalah ini.'
+        ],
+        zh: [
+          '全球变暖是影响地球生命的严重问题。据估计，人类活动，如化石燃料燃烧，是全球变暖的主要原因。',
+          '减少温室气体排放以减缓全球变暖至关重要。植树造林，提高能源效率，使用可再生能源是应对这一问题的重要步骤。'
+        ],
+        ja: [
+          '地球温暖化は地球上の生命に影響を与える深刻な問題です。化石燃料の燃焼など、人間の活動が温暖化の主な原因であるとされています。',
+          '温室効果ガスの排出を減少させることは、温暖化を遅らせるために重要です。樹木の植林、エネルギー効率の向上、再生可能エネルギーの利用は、この問題に対処するために取られるべき重要な手順です。'
+        ],
+        ar: [
+          'الاحتباس الحراري هو مشكلة خطيرة تؤثر على الحياة على الأرض. يُقدر أن الأنشطة البشرية، مثل حرق الوقود الأحفوري، هي السبب الرئيسي للاحتباس الحراري.',
+          'من المهم تقليل انبعاثات الغازات الدفيئة لتبطئ من وتيرة الاحتباس الحراري. زراعة الأشجار، وتحسين كفاءة الطاقة، واستخدام مصادر الطاقة المتجددة هي خطوات هامة يمكن اتخاذها للتعامل مع هذه المشكلة.'
+        ],
+        ko: [
+          '지구 온난화는 지구 상의 삶에 영향을 미치는 심각한 문제입니다. 화석 연료의 연소와 같은 인간의 활동이 지구 온난화의 주요 원인이라고 추정됩니다.',
+          '온실 가스 배출을 줄이는 것은 지구 온난화를 늦추는 데 중요합니다. 나무 심기, 에너지 효율 향상, 재생 가능한 에너지 원천을 사용하는 것은 이 문제에 대처하기 위한 중요한 단계입니다.'
+        ]
+      };
+
+      return texts[language][Math.floor(Math.random() * texts[language].length)];
+    }
+
+    function startTest() {
+      document.getElementById('input-box').value = '';
+      document.getElementById('input-box').disabled = false;
+      document.getElementById('start-button').disabled = true;
+      document.getElementById('restart-button').disabled = true;
+
+      errorCount = 0;
+      isTimeUp = false;
+      startTimer(60);
+    }
+
+    function checkTyping() {
+      if (isTimeUp) return;
+
+      const inputText = document.getElementById('input-box').value;
+      const words = text.split(' ');
+      const inputWords = inputText.split(' ');
+
+      errorCount = 0;
+
+      const errorsBody = document.getElementById('errors-body');
+      errorsBody.innerHTML = '';
+
+      for (let i = 0; i < words.length; i++) {
+        const row = errorsBody.insertRow(-1);
+
+        const cell1 = row.insertCell(0);
+        cell1.textContent = words[i];
+
+        const cell2 = row.insertCell(1);
+        cell2.textContent = i < inputWords.length ? inputWords[i] : '';
+
+        const cell3 = row.insertCell(2);
+        if (i < inputWords.length && words[i] !== inputWords[i]) {
+          errorCount++;
+          cell2.style.color = 'red';
+          cell3.textContent = 'Salah';
+          cell3.style.color = 'red';
+        } else {
+          cell3.textContent = 'Benar';
+          cell3.style.color = 'green';
+        }
+      }
+    }
+
+    function startTimer(duration) {
+      let timer = duration, minutes, seconds;
+      startTime = new Date().getTime();
+
+      const intervalId = setInterval(function () {
+        if (isTimeUp) {
+          clearInterval(intervalId);
+          showResults();
+        }
+
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.getElementById('timer').textContent = 'Waktu: ' + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          isTimeUp = true;
+          document.getElementById('input-box').disabled = true;
+          document.getElementById('restart-button').disabled = false;
+        }
+      }, 1000);
+    }
+
+    function showResults() {
+      const endTime = new Date().getTime();
+      const elapsedTime = (endTime - startTime) / 1000; // in seconds
+      const wordsPerMinute = (text.split(' ').length / elapsedTime) * 60;
+
+      const accuracy = ((text.split(' ').length - errorCount) / text.split(' ').length) * 100;
+
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = `<p>Selesai! Hasil tes:</p>
+                              <p>Kesalahan Ketik: ${errorCount} kata</p>
+                              <p>Kecepatan Pengetikan: ${wordsPerMinute.toFixed(2)} kata per menit</p>
+                              <p>Akurasi: ${accuracy.toFixed(2)}%</p>`;
+    }
+
+    function restartTest() {
+      document.getElementById('input-box').value = '';
+      document.getElementById('results').innerHTML = '';
+      document.getElementById('errors-body').innerHTML = '';
+      document.getElementById('start-button').disabled = false;
+      document.getElementById('restart-button').disabled = true;
+    }
+
+    document.getElementById('typing-text').textContent = text;
+  </script>
+ <script>
+    function toggleMenu() {
+      var burgerMenu = document.getElementById('burgerMenu');
+      burgerMenu.classList.toggle('open');
+  
+      if (burgerMenu.classList.contains('open')) {
+        setTimeout(function () {
+          burgerMenu.style.transition = 'transform 0.5s';
+          burgerMenu.style.transform = 'translateY(0)';
+        }, 100);
+      } else {
+        burgerMenu.style.transition = 'transform 0.5s';
+        burgerMenu.style.transform = 'translateY(-20px)';
+      }
+    }
+  </script>
+</body>
+</html>

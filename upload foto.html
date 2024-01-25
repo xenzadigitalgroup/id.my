@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XENZA TOWER DIGITAL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <link rel="shortcut icon" href="xz_tower-removebg-preview.png"/>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: #007bff;
+            padding: 10px;
+            color: #fff;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #uploadBtn {
+            cursor: pointer;
+        }
+
+        #submitBtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+
+        #submitBtn:hover {
+            background-color: #45a049;
+        }
+
+        #error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #description {
+            font-size: 12px;
+            color: #555;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p>&copy; 2021-2024 XENZA DIGITAL GROUP. All rights reserved.</p>
+        <p>
+            <a href="mailto:xenzadigital@gmail.com" style="color: #fff;">
+                <i class="fa-regular fa-envelope"></i> Email
+            </a> |
+            <a href="https://wa.me/message/WX4ZSF5UCSA7J1" style="color: #fff;" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+        </p>
+    </header>
+
+    <form id="uploadForm">
+        <h1>UPLOAD FOTO</h1>
+        <p><h1>Maintenance</h1></p>
+        <p id="description">Untuk saat ini upload foto dalam tahap pengembangan</p>
+
+        <label for="fromEmail">Email Pengirim:</label>
+        <input type="email" id="fromEmail" name="fromEmail" required>
+
+        <label for="name">Nama Pengirim:</label>
+        <p id="description">Jika kamu sudah pernah upload foto, pastikan nama kamu sesuai dengan nama sebelumnya.</p>
+        <input type="text" id="name" name="name" required>
+
+        <label for="dob">Tanggal Lahir Pengirim:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="photo">Upload Foto (jpg/png):</label>
+        <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png" required>
+        <small id="error">Error message will appear here if any.</small>
+
+        <button type="button" id="submitBtn">Submit</button>
+    </form>
+
+    <article>
+        Dalam tahap pengembangan!!!
+    </article>
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            var fromEmail = document.getElementById('fromEmail').value;
+            var name = document.getElementById('name').value;
+            var dob = document.getElementById('dob').value;
+            var photoInput = document.getElementById('photo');
+
+            if (fromEmail === '' || name === '' || dob === '' || photoInput.files.length === 0) {
+                document.getElementById('error').innerText = 'Mohon isi semua field.';
+            } else {
+                document.getElementById('error').innerText = '';
+                sendNotificationEmail(fromEmail, name, dob);
+                alert('Data berhasil dikirim!');
+            }
+        });
+
+        function sendNotificationEmail(fromEmail, name, dob) {
+            emailjs.init('YOUR_EMAILJS_USERID');
+            emailjs.send('YOUR_EMAILJS_SERVICEID', 'YOUR_EMAILJS_TEMPLATEID', {
+                to_email: 'xenzadigital@gmail.com',
+                from_email: fromEmail,
+                user_name: name,
+                user_dob: dob
+            }).then(function(response) {
+                console.log('Email notification sent:', response);
+            }, function(error) {
+                console.error('Email send error:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>

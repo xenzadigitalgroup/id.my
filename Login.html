@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - XENZA DIGITAL GROUP</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-Op5bUZ8ynrL8I+CgdMLFNLwTt2Te0FSa5z1lUsm66Tpa29k9aI1EGeeBhbfUlBjvF98mo+WW0vByVKJEXzW0Lg==" crossorigin="anonymous" />
+  <link rel="shortcut icon" href="favicon.ico"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #5c5c5c;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+      background-color: #fff;
+      color: #005eff;
+      border-color: #005eff;
+      border-radius: 50%;
+    }
+
+    nav a.active {
+      background-color: #fff;
+      color: #005eff;
+      border-color: #005eff;
+      border-radius: 8px;
+    }
+
+    .login-container {
+      background-color: #3498db;
+      color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      margin-top: 20px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .login-container:hover {
+      background-color: #2980b9;
+    }
+
+    h2 {
+      color: #fff;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #0adfca;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #404040;
+    }
+
+    .social-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .social-buttons button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 5px;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #0084ff;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .google-button,
+    .facebook-button {
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .google-button:hover,
+    .facebook-button:hover {
+      background-color: #005eff;
+    }
+
+    .google-button i,
+    .facebook-button i {
+      margin-right: 5px;
+    }
+
+    .register-forgot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.register-forgot button {
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 1px solid #fff; /* Tambahkan baris ini untuk garis bawah */
+}
+
+.register-forgot button:hover {
+  border-bottom: 1px solid #000000; /* Ubah warna garis bawah saat tombol dihover */
+}
+
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">
+      <i class="fa-solid fa-home"></i> Home
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-business-time"></i> Market
+    </a>
+    <a href="https://xenza.bukaolshop.site/" target="_blank">
+      <i class="fa-solid fa-ticket"></i> Web Top Up
+    </a>
+    <a href="Login.html" class="active">
+      <i class="fa-solid fa-user"></i> User
+    </a>
+  </nav>
+  <div class="login-container">
+    <h2>Saat ini halaman login sedang di lakukan pemeliharaan atau "Maintenance"</h2>
+    <form action="#" method="post">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <div class="social-buttons">
+      <button class="google-button">
+        <i class="fa-brands fa-google"></i> Login dengan Google
+      </button>
+      <button class="facebook-button">
+        <i class="fa-brands fa-facebook"></i> Login dengan Facebook
+      </button>
+    </div>
+    <div class="register-forgot">
+        <button onclick="window.location.href='daftar web.html'">Daftar</button>
+        <button onclick="window.location.href='https://wa.me/message/WX4ZSF5UCSA7J1'">Lupa Password</button>
+    </div>
+  </div>
+</body>
+</html>

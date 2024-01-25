@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="xzinves.png"/>
+    <title>XENZA DIGITAL GROUP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('bg1.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            border-radius: 8px; /* Tambahkan efek sedikit lengkung */
+            padding: 8px 16px; /* Sesuaikan padding sesuai kebutuhan */
+            background-color: #4682b4; /* Sesuaikan warna background sesuai kebutuhan */
+            display: inline-block;
+        }
+
+        article {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        th, td {
+            border: 1px solid #fff;
+            padding: 10px;
+            text-align: left;
+            color: #000;
+        }
+
+        th {
+            background-color: #4682b4;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #87ceeb;
+        }
+
+        #joinButton {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+            background-color: #4682b4;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        #countdown {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        #footerLinks {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #footerLinks a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            border-radius: 8px; /* Tambahkan efek sedikit lengkung */
+            padding: 8px 16px; 
+            background-color: #4682b4;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <p id="currentDate">&copy; 2023 XENZA DIGITAL GROUP. All rights reserved. | 
+            <a href="mailto:xenzadigital@gmail.com">Bantuan</a>
+        </p>
+        
+        <a href="index.html">Dashboard</a>
+        <a href="#">Market</a>
+        <a href="top up.html">Topup</a>
+        <a href="https://wa.me/message/WX4ZSF5UCSA7J1" style="color: #fff;" target="_blank">WhatsApp</a>
+    </header>
+
+    <article>
+        <h1>Dibawah ini adalah detail pemegang saham pada periode 2024/2025</h1>
+
+        <table>
+            <tr>
+                <th>Nama</th>
+                <th>Total Dana</th>
+                <th>Jumlah Unit</th>
+                <th>Total Keuntungan</th>
+            </tr>
+            <tr>
+                <td>ZAKI MUSHTHAFA BILLAH</td>
+                <td>Rp65.080.000</td>
+                <td>233,800 unit</td>
+                <td>Rp 30.080.000</td>
+            </tr>
+            <tr>
+                <td>SALSABILA MUSLIMA</td>
+                <td>Rp43.000.000</td>
+                <td>112,000 unit</td>
+                <td>Rp 8.900.000</td>
+            </tr>
+            <tr>
+                <td>REZKI MAULANA</td>
+                <td>Rp32.500.000</td>
+                <td>89,000 unit</td>
+                <td>Rp 7.340.000</td>
+            </tr>
+            <tr>
+                <td>HALIM SETIAWAN</td>
+                <td>Rp31.890.000</td>
+                <td>107,000 unit</td>
+                <td>Rp 7.290.000</td>
+            </tr>
+            <tr>
+                <td>FITRIA</td>
+                <td>Rp27.300.000</td>
+                <td>94,000 unit</td>
+                <td>Rp 6.300.000</td>
+            </tr>
+        </table>
+     <article>
+        <h1>Keuntungan akan di berikan setiap tanggal 25 setiap bulannya</h1>
+    </article>
+        <!-- Tombol "Ayo Bergabung" yang mengarah ke Google Form -->
+        <a href="AYOO.html" id="joinButton">Ayo Bergabung</a>
+    </article>
+    <script>
+        // Fungsi untuk mendapatkan tanggal dan waktu saat ini
+        function getCurrentDateTime() {
+            const currentDate = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return currentDate.toLocaleDateString('en-US', options);
+        }
+    
+        // Mengisi elemen dengan id "currentDate" dengan tanggal dan waktu saat ini
+        document.getElementById('currentDate').innerHTML += getCurrentDateTime();
+    </script>
+    
+</body>
+
+</html>

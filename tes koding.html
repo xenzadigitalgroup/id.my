@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDENT AREA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/htmlmixed/htmlmixed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/css/css.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/javascript/javascript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/python/python.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background: linear-gradient(to right, #87CEEB, #6495ED);
+      padding: 10px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1; /* Set z-index to make sure it's above the content */
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      color: white;
+      font-size: 14px;
+    }
+
+    nav {
+      margin: 10px 0;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 10px;
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      border: 2px solid #87CEEB;
+      border-radius: 8px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-family: 'Anonymous Pro', monospace;
+    }
+
+    nav a:hover {
+      background-color: #87CEEB;
+      color: white;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .burger-icon {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      z-index: 2; /* Set z-index to make sure it's above the header */
+    }
+
+    .burger-icon div {
+      width: 30px;
+      height: 3px;
+      background-color: white;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    #burgerMenu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 10px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.5s, transform 0.5s;
+      z-index: 1; /* Set z-index to make sure it's above the content */
+    }
+
+    #burgerMenu.open {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #burgerMenu a {
+      display: block;
+      margin: 5px 0;
+      text-decoration: none;
+      color: #333;
+      font-family: 'Anonymous Pro', monospace;
+      border: 1px solid #87CEEB;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    #codeEditor {
+      width: 80%;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    #code {
+      width: 100%;
+      height: 300px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    #runButton {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      background: linear-gradient(to right, #87CEEB, #6495ED);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-family: 'Anonymous Pro', monospace;
+    }
+
+    #runButton:hover {
+      background-color: #6495ED;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .line-error {
+      background-color: #FFEBEE;
+    }
+
+    @media only screen and (max-width: 600px) {
+      nav a {
+        display: none;
+      }
+
+      .burger-icon {
+        display: block;
+      }
+
+      .burger-icon.open div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .burger-icon.open div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger-icon.open div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      #burgerMenu.open {
+        display: block;
+      }
+
+      #codeEditor {
+        width: 100%;
+      }
+    }
+    p {
+      text-align: left;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="burger-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <h1>Code Editor</h1>
+    <h3>&copy; 2024 XENZA DIGITAL GROUP</h3>
+    <nav>
+      <a href="tes mengetik.html">Tes Mengetik</a>
+      <a href="kalkulator.html">Kalkulator</a>
+      <a href="tes koding.html">Tes Coding</a>
+      <a href="#">Tes Bahasa</a>
+    </nav>
+    <nav class="burger-menu" id="burgerMenu">
+      <a href="tes mengetik.html">Tes Mengetik</a>
+      <a href="kalkulator.html">Kalkulator</a>
+      <a href="tes koding.html">Tes Coding</a>
+      <a href="#">Tes Bahasa</a>
+    </nav>
+  </header>
+<p>Pada saat ini hanya bisa menjalankan bahasa pemograman Javascript, Phyton, PHP yang terdapat di dalam bagian HTML</p>
+<p>Note : Selalu simpan kodingan kamu dengan cara copy dan paste, website ini tidak dapat menyimpan kodingan kamu!!!</p>
+  <div id="codeEditor">
+    <textarea id="code" placeholder="Write your code here..." oninput="highlightCode()"></textarea>
+    <button id="runButton" onclick="runCode()">Run</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+      lineNumbers: true,
+      mode: 'htmlmixed',
+      theme: 'default',
+      extraKeys: { 'Ctrl-Space': 'autocomplete' },
+    });
+
+    function toggleMenu() {
+      var burgerMenu = document.getElementById('burgerMenu');
+      burgerMenu.classList.toggle('open');
+
+      if (burgerMenu.classList.contains('open')) {
+        setTimeout(function () {
+          burgerMenu.style.transition = 'transform 0.5s';
+          burgerMenu.style.transform = 'translateY(0)';
+        }, 100);
+      } else {
+        burgerMenu.style.transition = 'transform 0.5s';
+        burgerMenu.style.transform = 'translateY(-20px)';
+      }
+    }
+
+    function changeLanguage(language) {
+      editor.setOption('mode', language);
+      highlightCode();
+    }
+
+    function highlightCode() {
+      var outputDiv = document.getElementById('output');
+      var language = editor.getOption('mode');
+
+      outputDiv.innerHTML = '';
+
+      // Highlight syntax using CodeMirror
+      CodeMirror.runMode(editor.getValue(), language, outputDiv);
+    }
+
+    function runCode() {
+  var outputDiv = document.getElementById('output');
+  var language = editor.getOption('mode');
+  var code = editor.getValue();
+
+  outputDiv.innerHTML = '';
+
+  if (language === 'htmlmixed' || language === 'css') {
+    // Jika kode adalah HTML atau CSS, pasang ke elemen iframe
+    var iframe = document.createElement('iframe');
+    iframe.width = '100%';
+    iframe.height = '300px';
+    iframe.style.border = 'none';
+    outputDiv.appendChild(iframe);
+
+    // Dokumen dalam iframe untuk menulis kode HTML dan CSS
+    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+    iframeDocument.open();
+    iframeDocument.write(code);
+    iframeDocument.close();
+  } else if (language === 'python') {
+    // Jika kode adalah Python, kirim ke server untuk dieksekusi
+    fetch('https://your-python-execution-server/execute', {
+      method: 'POST',
+      body: JSON.stringify({ code: code }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.text())
+      .then(result => {
+        outputDiv.textContent = result;
+      })
+      .catch(error => {
+        outputDiv.innerHTML = '<div style="color: #F44336;">Error: ' + error.message + '</div>';
+      });
+  } else if (language === 'php') {
+    // Jika kode adalah PHP, kirim ke server untuk dieksekusi
+    fetch('https://your-php-execution-server/execute', {
+      method: 'POST',
+      body: JSON.stringify({ code: code }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.text())
+      .then(result => {
+        outputDiv.textContent = result;
+      })
+      .catch(error => {
+        outputDiv.innerHTML = '<div style="color: #F44336;">Error: ' + error.message + '</div>';
+      });
+  } else {
+    // Selain HTML, CSS, Python, dan PHP, gunakan CodeMirror untuk menyorot sintaks
+    CodeMirror.runMode(code, language, outputDiv);
+  }
+}
+
+
+  </script>
+</body>
+</html>

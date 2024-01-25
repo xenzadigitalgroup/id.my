@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tes Bahasa</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f5f5f5; /* Warna latar belakang */
+    }
+
+    header {
+      background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
+      padding: 10px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
+      position: relative;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeInUp 0.5s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      color: white;
+      font-size: 14px;
+    }
+
+    nav {
+      margin: 10px 0;
+    }
+
+    .language-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
+      border-radius: 8px; /* Sudut sedikit melengkung */
+      overflow: hidden;
+    }
+
+    .language-button {
+      flex: 1;
+      padding: 10px;
+      text-decoration: none;
+      color: #333; /* Warna teks hitam */
+      transition: background-color 0.3s, box-shadow 0.3s; /* Transisi pada warna latar dan bayangan */
+      font-family: 'Anonymous Pro', monospace;
+    }
+
+    .language-button:hover {
+      background-color: #87CEEB; /* Warna background saat diarahkan */
+      color: white;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Bayangan saat dihover */
+    }
+
+    .burger-icon {
+      display: none; /* Sembunyikan ikon burger pada tampilan desktop */
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    .burger-icon div {
+      width: 30px;
+      height: 3px;
+      background-color: white; /* Warna putih pada ikon burger */
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    .burger-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 10px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.5s, transform 0.5s; /* Tambahkan transisi untuk opasitas dan transform */
+    }
+
+    .burger-menu.open {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .burger-menu a {
+      display: block;
+      margin: 5px 0;
+      text-decoration: none;
+      color: #333;
+      font-family: 'Anonymous Pro', monospace;
+      border: 1px solid #87CEEB;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    #language-select {
+      margin-bottom: 20px;
+    }
+
+    #language-select select {
+      width: 100%;
+    }
+
+    #start-button,
+    #restart-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
+      color: white;
+      border: none;
+      border-radius: 8px; /* Sudut sedikit melengkung */
+      margin: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s; /* Transisi pada warna latar dan bayangan */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan awal */
+      font-family: 'Anonymous Pro', monospace;
+    }
+
+    #start-button:disabled,
+    #restart-button:disabled {
+      background-color: #ddd;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    #results {
+      background-color: #f9f9f9; /* Warna abu-abu muda */
+      padding: 20px;
+      border-radius: 15px; /* Sudut sedikit melengkung */
+    }
+
+    /* Tampilan mobile */
+    @media only screen and (max-width: 600px) {
+      nav a {
+        display: none; /* Sembunyikan tombol pada tampilan mobile */
+      }
+
+      .burger-icon {
+        display: block; /* Tampilkan ikon burger pada tampilan mobile */
+      }
+
+      .burger-icon.open div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .burger-icon.open div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger-icon.open div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      .burger-menu.open {
+        display: block;
+      }
+      
+      .language-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="burger-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <h1>Tes Bahasa</h1>
+    <p>&copy; 2024 XENZA DIGITAL GROUP</p>
+    <nav>
+      <a href="#">Tes Mengetik</a>
+      <a href="#">Kalkulator</a>
+      <a href="#">Tes Coding</a>
+      <a href="#">Tes Bahasa</a>
+    </nav>
+    <nav class="burger-menu" id="burgerMenu">
+      <a href="#">Tes Mengetik</a>
+      <a href="#">Kalkulator</a>
+      <a href="#">Tes Coding</a>
+      <a href="#">Tes Bahasa</a>
+    </nav>
+  </header>
+
+  <div id="language-select">
+    <label for="language">Pilih Bahasa:</label>
+    <div class="language-buttons">
+      <a href="#" class="language-button" onclick="redirectToLanguageTest('en')">English</a>
+      <a href="#" class="language-button" onclick="redirectToLanguageTest('zh')">中文 (Bahasa Cina)</a>
+      <a href="#" class="language-button" onclick="redirectToLanguageTest('ja')">日本語 (Bahasa Jepang)</a>
+      <a href="#" class="language-button" onclick="redirectToLanguageTest('ko')">한국어 (Bahasa Korea)</a>
+    </div>
+  </div>
+
+  <script>
+    function redirectToLanguageTest(language) {
+      // Ganti URL berikut sesuai dengan URL tes bahasa untuk masing-masing bahasa
+      let url;
+      switch (language) {
+        case 'en':
+          url = 'https://www.example.com/english-test';
+          break;
+        case 'zh':
+          url = 'https://www.example.com/chinese-test';
+          break;
+        case 'ja':
+          url = 'https://www.example.com/japanese-test';
+          break;
+        case 'ko':
+          url = 'https://www.example.com/korean-test';
+          break;
+        default:
+          url = 'https://www.example.com/default-test';
+          break;
+      }
+      window.location.href = url;
+    }
+  </script>
+
+  <script>
+    function toggleMenu() {
+      var burgerMenu = document.getElementById('burgerMenu');
+      burgerMenu.classList.toggle('open');
+  
+      if (burgerMenu.classList.contains('open')) {
+        setTimeout(function () {
+          burgerMenu.style.transition = 'transform 0.5s';
+          burgerMenu.style.transform = 'translateY(0)';
+        }, 100);
+      } else {
+        burgerMenu.style.transition = 'transform 0.5s';
+        burgerMenu.style.transform = 'translateY(-20px)';
+      }
+    }
+  </script>
+</body>
+</html>

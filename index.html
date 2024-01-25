@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico"/>  
+    <title>XENZA DIGITAL GROUP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Minimalistic background color */
+            color: #333; /* Text color */
+        }
+
+        header {
+            background-color: #4d4d4d; /* Dark gray header background */
+            text-align: center;
+            padding: 10px;
+            color: #fff; /* Header text color */
+            animation: fadeInDown 1s ease-out; /* Animation for header */
+        }
+
+        .container {
+            display: auto;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100vh;
+        }
+
+        article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff; /* White background for articles */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Minimalistic shadow effect */
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out; /* Animation for articles */
+            overflow-y: hidden; /* Menambahkan overflow-y untuk membuat artikel dapat di-slide */
+            max-height: 500px; /* Sesuaikan dengan kebutuhan tinggi maksimum */
+            text-align: left;
+        }
+
+        article.scrollable {
+            overflow-y: auto; /* Tambahkan efek scroll hanya pada artikel dengan class "scrollable" */
+        }
+
+        article ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4d4d4d;
+            color: #fff;
+        }
+
+        footer {
+            background-color: #6495ED; /* Dark gray footer background */
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            animation: fadeInUp 1s ease-out; /* Animation for footer */
+        }
+
+        #prayerTime {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        h3 a {
+            color: #005eff; /* Blue link color */
+            text-decoration: none;
+            position: flex-start;
+            display: inline-block;
+        }
+
+        h3 a::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00336600;
+        }
+
+        /* Keyframes for fadeInDown and fadeInUp animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            background-color: #6495ED; /* Warna background saat dihover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Bayangan saat dihover */
+        }
+
+        nav a.active {
+            padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Sudut sedikit melengkung */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transisi pada warna latar dan bayangan */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan awal */
+    font-family: 'Anonymous Pro', monospace;
+        }
+         /* Animasi untuk tulisan bergerak */
+        @keyframes moveText {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .moving-text {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: moveText 15s linear infinite; /* Animasi selama 13 detik, bergerak secara linier dan berulang */
+        }
+
+        .moving-text .greet,
+        .moving-text .time {
+            margin-right: 10px; /* Tambahkan margin antara dua elemen */
+        }
+
+        .moving-text .greet {
+            color: #000000; /* Warna tulisan hitam */
+        }
+
+        .moving-text .time {
+            color: #00ff00; /* Warna tulisan hijau */
+        }
+        #helpButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #005eff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#helpButton:hover {
+    background-color: #003366;
+}
+#helpForm {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            z-index: 999;
+        }
+
+        #helpForm label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #helpForm textarea {
+            width: 100%;
+            height: 100px;
+            resize: none;
+        }
+
+        #helpForm button {
+            background-color: #005eff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #helpForm button:hover {
+            background-color: #003366;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="helpForm">
+        <label for="email">Email User:</label>
+        <input type="text" id="email" required>
+
+        <label for="name">Nama User:</label>
+        <input type="text" id="name" required>
+
+        <label for="report">Laporan User:</label>
+        <textarea id="report" required></textarea>
+
+        <button onclick="sendHelpMessage()">Kirim</button>
+    </div>
+    <header>
+        <p>&copy; 2021-2024 XENZA DIGITAL GROUP. All rights reserved.</p>
+        <p>
+            <a href="mailto:xenzadigital@gmail.com" style="color: #fff;">
+                <i class="fa-regular fa-envelope"></i> Email
+            </a> |
+            <a href="https://wa.me/message/WX4ZSF5UCSA7J1" style="color: #fff;" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+
+        <!-- Navigasi Menu -->
+        <nav>
+            <a href="index.html" class="active">
+                <i class="fa-solid fa-home"></i> Home
+            </a>
+            <a href="Market.html">
+                <i class="fa-solid fa-business-time"></i> Market
+            </a>
+            <a href="https://xenza.bukaolshop.site/">
+                <i class="fa-solid fa-ticket"></i> Web Top Up
+            </a>
+            <a href="Login.html">
+                <i class="fa-solid fa-user"></i> User
+            </a>
+        </nav>
+    </header>
+   
+    <script>
+         function showHelpForm() {
+            document.getElementById('helpForm').style.display = 'block';
+        }
+
+        // Fungsi untuk mengirim pesan bantuan
+        function sendHelpMessage() {
+            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value;
+            const report = document.getElementById('report').value;
+
+            // Kirim pesan ke email
+            const emailRecipient = 'xenzadigital@gmail.com';
+            const subject = 'Pesan Bantuan XENZA DIGITAL GROUP';
+            const body = `Email User: ${email}\nNama User: ${name}\n\nLaporan User:\n${report}`;
+
+            window.location.href = `mailto:${emailRecipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Tampilkan notifikasi balasan otomatis
+            alert(`Terimakasih ${name}, laporan kamu telah kami terima`);
+
+            // Sembunyikan formulir setelah mengirim pesan
+            document.getElementById('helpForm').style.display = 'none';
+        }
+
+        function showHelpForm() {
+        document.getElementById('helpForm').style.display = 'block';
+    }
+
+    
+        const apiKey = 'YOUR_API_KEY';
+
+        // Fungsi untuk mendapatkan waktu sholat berdasarkan lokasi pengguna
+        function getPrayerTimesByLocation(latitude, longitude) {
+            const apiUrl = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2&school=1&apikey=${apiKey}`;
+
+            // Mendapatkan data waktu sholat dari API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const prayerTimes = data.data.timings;
+
+                    // Menampilkan waktu sholat pada elemen dengan id "prayerTime"
+                    document.getElementById('prayerTime').innerHTML = `
+                        <h3>Waktu Sholat di Lokasi Anda</h3>
+                        <p>Fajr: ${prayerTimes.Fajr}</p>
+                        <p>Dhuhr: ${prayerTimes.Dhuhr}</p>
+                        <p>Asr: ${prayerTimes.Asr}</p>
+                        <p>Maghrib: ${prayerTimes.Maghrib}</p>
+                        <p>Isha: ${prayerTimes.Isha}</p>
+                    `;
+                })
+                .catch(error => console.error('Error fetching prayer time:', error));
+        }
+
+        // Fungsi untuk mendapatkan lokasi pengguna
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    // Panggil fungsi untuk mendapatkan waktu sholat berdasarkan lokasi
+                    getPrayerTimesByLocation(latitude, longitude);
+                }, error => {
+                    console.error('Error getting location:', error);
+                    // Jika terjadi kesalahan, menggunakan lokasi default (Jakarta)
+                    getPrayerTimesByLocation(-6.2088, 106.8456); // Ganti dengan koordinat lokasi default Anda
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+                // Jika geolocation tidak didukung, menggunakan lokasi default (Jakarta)
+                getPrayerTimesByLocation(-6.2088, 106.8456); // Ganti dengan koordinat lokasi default Anda
+            }
+        }
+
+        // Panggil fungsi untuk mendapatkan lokasi pengguna dan waktu sholat
+        getLocation();
+    </script>
+    <article>
+        <h1>Student Area</h1>
+        <p id="description">Tempat dimana kamu bisa belajar mengetik, membuat codingan, belajar bahasa, dan penggunaan kalkulator.</p>
+        <a href="tes mengetik.html" class="box" style="background-color: #005eff;">
+            <i class="fa-solid fa-graduation-cap"></i>Student Area
+        </a>
+    </article>   
+<article>
+    <h1>Download Aplikasi XENZA TOP UP</h1>
+    <p>Klik pada tobol dibawah ini</p>
+    <p>
+        <a href="https://app.bukaolshop.com/toko/xenza" class="box" style="background-color: #005eff;">
+        <i class="fa-solid fa-download"></i> Download Aplikasi
+        </a>
+</article> 
+<article>
+    <h1>Upload Foto Berbasis Cloud</h1>
+    <p id="description">Upload foto kamu berbasis cloud pada server XENZA DIGITAL GROUP gratis hingga 20Gb penyimpanan.</p>
+    <a href="upload foto.html" class="box" style="background-color: #005eff;">
+        <i class="fa-solid fa-cloud-arrow-up"></i></i>Upload Foto
+    </a>
+</article>   
+<article>
+       
+<div class="moving-text">
+    <span class="greet">Market :</span>
+    <span class="greet">XDG SAHAM</span><span class="time">+23%</span>
+</div>    
+        <h1>XENZA DIGITAL GROUP</h1>
+        <ul>
+            <h3>Kami bergerak pada bidang</h3>
+            <li>XDG JUAL BELI (akun game) </li>
+            <li>XDG TOP UP (E-Wallet, Vocher game, Pulsa) </li>
+            <li>XDG JASA (Jasa admin, Jasa CS) </li>
+            <li>XDG INVESTASI (Jasa membantu untuk memberikan produk reksadana terbaik)</li>
+            <h3><a href="saham.html">LIHAT PEMEGANG SAHAM DISINI
+                    <i class="fa-regular fa-file-lines"></i>
+                </a></h3>
+            <h3><a href="rdn.html">LIHAT PEMEGANG RDN DISINI
+                    <i class="fa-regular fa-file-lines"></i>
+                </a></h3>
+        </ul>
+    </article>
+
+    <article class="scrollable"> <!-- Tambahkan class "scrollable" untuk memberikan efek scroll pada artikel ini -->
+        <h1>Cari Kegiatan</h1>
+        <form action="search.html" method="get">
+            <input type="text" name="query" placeholder="Sedang Maintenance">
+            <button type="submit">Cari</button>
+        </form>
+        <h1>Kalender Kegiatan XENZA DIGITAL GROUP</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1 Januari 2024</td>
+                    <td>Pembaruan data saham</td>
+                </tr>
+                <tr>
+                    <td>2 Januari 2024</td>
+                    <td>Peluncuran produk saham terbaru</td>
+                </tr>
+                <tr>
+                    <td>5 Januari 2024</td>
+                    <td>Pembukaan pendaftaran magang</td>
+                </tr>
+                <tr>
+                    <td>8 Januari 2024</td>
+                    <td>Penerimaan alokasi aset baru (XDG MY)</td>
+                </tr>
+                <tr>
+                    <td>15 Januari 2024</td>
+                    <td>Pengkinia data anggota (XDG ID, XDG MY)</td>
+                </tr>
+                <tr>
+                    <td>30 Januari 2024</td>
+                    <td>Perkiraan kenaikan RDN</td>
+                </tr>
+                <tr>
+                    <td>5 Februari 2024</td>
+                    <td>Penutupan pendaftaran magang</td>
+                </tr>
+                <tr>
+                    <td>12 Februari 2024</td>
+                    <td>Pengunguman penerimaan magang</td>
+                </tr>
+                <tr>
+                    <td>16 Februari 2024</td>
+                    <td>Pembaruan data server</td>
+                </tr>
+                <tr>
+                    <td>19 Februari 2024</td>
+                    <td>Pembukaan penerimaan investor 2024</td>
+                </tr>
+                <tr>
+                    <td>26 Februari 2024</td>
+                    <td>Penutupan penerimaan investor 2024</td>
+                </tr>
+                <tr>
+                    <td>1 Meret 2024</td>
+                    <td>Pencairan dana investor 2023</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+
+    <article>
+        <h1>AYO BERGABUNG BERSAMA KAMI</h1>
+        <p>Kamu bisa mengikuti kegiatan magang atau bekerja dengan kami. Dan kamu juga bisa mengikuti kegiatan magang atau kerja
+            WFH atau WFO, ini sangat cocok jika kamu masih mahasiswa, tamatan SMA, maupun lulus S1
+        </p>
+        <p> Untuk pendaftaran silahkan klik pada kolom di bawah</p>
+
+        <!-- Pindahkan <p> ke dalam artikel ini -->
+        
+        <p>
+            <a href="form daftar.html" class="box" style="background-color: #005eff;">
+            <i class="fas fa-user-plus"></i> Daftar Magang
+            </a>
+            <a href="form daftar.html" class="box" style="background-color: #005eff;">
+            <i class="fas fa-briefcase"></i> Daftar Kerja
+            </a>
+        </p>   
+    </article>
+    <article>
+        <h2>Program Credit x XenzaPay</h2>
+        <p>
+            Program credit ini bertujuan untuk memberikan modal kepada usaha/bisnis baru yang belum memiliki modal.
+            Ayo daftar program credit ini dan dapatkan limit hingga 3 Juta Rupiah.
+        </p>
+        <p>Jika ada pertanyaan terkait program credit ini silahkan hibungi admin kami melalui tombol WhatsApp dibawah ini.</p>
+        <p>
+            <a href="https://wa.me/message/WX4ZSF5UCSA7J1" class="box" style="background-color: #005eff;">
+          
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+        
+          <a href="form daftar.html" class="box" style="background-color: #005eff;">
+            <i class="fas fa-user-plus"></i> Ikuti Program
+            </a>
+        </p>  
+    </article>
+    <article>
+    <h2>Program Reseller</h2>
+    <p>Jadikan bisnis mu makin cuan dengan modal rendah. Bergabung bersama kami dan dapatkan produk-produk digital dengan harga dibawah pasar.</p>
+    <p>
+        <a href="form daftar.html" class="box" style="background-color: #005eff;">
+        <i class="fas fa-user-plus"></i> Ikuti Program
+        </a>
+    </p>  
+    </article>
+
+    <footer>
+        <div id="prayerTime"></div>
+        <p>&copy; 2023 XENZA DIGITAL GROUP. All rights reserved.</p>
+         <button onclick="showHelpForm()" id="helpButton">
+        <i class="fa-solid fa-question-circle"></i> Help
+    </button>
+    </footer>
+</body>
+
+</html>
