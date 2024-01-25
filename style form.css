@@ -1,73 +1,75 @@
 /* style.css */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
-    margin: 20px;
-    background-color: #f5f5f5; /* Warna latar belakang */
-  }
-  
-  header {
-    background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
-    padding: 10px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
-    position: relative;
-  }
-  
-  header h1 {
-    color: white;
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  header p {
-    margin: 5px 0 0;
-    color: white;
-    font-size: 14px;
-  }
-  
-  form {
-    width: 90%;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  }
-  
-  label {
-    display: block;
-    margin: 10px 0;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
-    color: white;
-    border: none;
-    border-radius: 8px; /* Sudut sedikit melengkung */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Transisi pada warna latar dan bayangan */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan awal */
-    font-family: 'Anonymous Pro', monospace;
-  }
-  
-  button:hover {
-    background-color: #6495ED; /* Warna background saat dihover */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Bayangan saat dihover */
-  }
-  div {
-    text-align: left;
-    font-size: 16px;
-  }  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: 20px;
+  background-color: #f5f5f5; /* Warna latar belakang */
+}
+
+header {
+  background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
+  padding: 10px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
+  position: relative;
+}
+
+header h1 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+}
+
+header p {
+  margin: 5px 0 0;
+  color: white;
+  font-size: 14px;
+}
+
+form {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(to right, #87CEEB, #6495ED); /* Gradasi warna biru muda */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Sudut sedikit melengkung */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Transisi pada warna latar dan bayangan */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan awal */
+  font-family: 'Anonymous Pro', monospace;
+}
+
+button:hover {
+  background-color: #6495ED; /* Warna background saat dihover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Bayangan saat dihover */
+}
+
+div {
+  text-align: left;
+  font-size: 16px;
+}  
