@@ -1,239 +1,184 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulir Pendaftaran</title>
-  <link rel="stylesheet" href="style form.css">
-</head>
-<body>
-  <header>
-    <div class="burger-icon" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <h1>Formulir Pendaftaran</h1>
-    <p>&copy; 2024 XENZA DIGITAL GROUP</p>
-  </header>
-
-  <form id="registrationForm" onsubmit="prepareEmail(event)">
-    <label for="name">Nama Sesuai KTP:</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="ktp">No KTP:</label>
-    <input type="text" id="ktp" name="ktp" required>
-
-    <label for="npwp">No NPWP (opsional):</label>
-    <input type="text" id="npwp" name="npwp">
-
-    <label for="hp">No HP/WhatsApp:</label>
-    <input type="tel" id="hp" name="hp" required>
-
-    <label for="birthdate">Tanggal Lahir:</label>
-    <input type="date" id="birthdate" name="birthdate" required>
-
-    <label for="age">Umur:</label>
-    <input type="number" id="age" name="age" required>
-
-    <label for="alamat">Alamat Sesuai KTP:</label>
-    <input type="text" id="alamat" name="alamat">
-
-    <label for="kota">Kota:</label>
-    <input type="text" id="kota" name="kota">
-
-    <label for="kodepos">Kode Pos:</label>
-    <input type="text" id="kodepos" name="kodepos">
-
-    <div class="checkbox">
-      <input type="checkbox" id="alamatBerbeda" onclick="toggleAlamatForm()">
-      <label for="alamatBerbeda">Centang kotak di atas jika alamat domisili berbeda dengan alamat yang ada di ktp<span>*</span></label>
-    </div>
-
-    <div id="alamatForm" style="display: none;">
-      <label for="alamatDomisili">Alamat Domisili:</label>
-      <input type="text" id="alamatDomisili" name="alamatDomisili">
-
-      <label for="kotaDomisili">Kota Domisili:</label>
-      <input type="text" id="kotaDomisili" name="kotaDomisili">
-
-      <label for="kodeposDomisili">Kode Pos Domisili:</label>
-      <input type="text" id="kodeposDomisili" name="kodeposDomisili">
-    </div>
-
-    <label for="negara">Negara:</label>
-    <select id="negara" name="negara" onchange="checkNegara()">
-      <option value="indonesia">Indonesia</option>
-      <option value="malaysia">Malaysia</option>
-    </select>
-
-    <div id="formIndonesia">
-      <label for="jenisPendaftaran">Jenis Pendaftaran:</label>
-      <select id="jenisPendaftaran" name="jenisPendaftaran" onchange="checkJenisPendaftaran()" required>
-        <option value="" disabled selected>Pilih Jenis Pendaftaran</option>
-        <option value="magang">Daftar Magang</option>
-        <option value="kerja">Daftar Kerja</option>
-        <option value="creditX">Program Credit X Xenza Pay</option>
-        <option value="reseller">Program Reseller</option>
-      </select>
-
-      <div id="formPekerjaan" style="display: none;">
-        <label for="pekerjaan">Pekerjaan:</label>
-        <select id="pekerjaan" name="pekerjaan">
-          <option value="guru">Pilih disini</option>
-          <option value="guru">Guru</option>
-          <option value="dokter">Dokter</option>
-          <option value="pelajar">Pelajar/Mahasiswa</option>
-          <option value="karyawan_swasta">Karyawan Swasta</option>
-          <option value="wirausaha">Wirausaha</option>
-          <option value="pns">PNS (Pegawai Negeri Sipil)</option>
-          <option value="polisi">Polisi</option>
-          <option value="tukang">Tukang</option>
-          <option value="penyiar_radio_tv">Penyiar Radio/TV</option>
-          <option value="arsitek">Arsitek</option>
-          <option value="petani">Petani</option>
-          <option value="nelayan">Nelayan</option>
-          <option value="pilot">Pilot</option>
-          <option value="desainer">Desainer</option>
-          <option value="teknisi_komputer">Teknisi Komputer</option>
-          <option value="montir">Montir</option>
-          <option value="pengacara">Pengacara</option>
-          <option value="dosen">Dosen</option>
-          <option value="peneliti">Peneliti</option>
-          <option value="pedagang">Pedagang</option>
-          <option value="lainnya">Lainnya</option>
-        </select>
-
-        <div id="lainnyaPekerjaan" style="display: none;">
-          <label for="pekerjaanLainnya">Pekerjaan Lainnya:</label>
-          <input type="text" id="pekerjaanLainnya" name="pekerjaanLainnya">
-        </div>
-      </div>
-    </div>
-
-    <div id="formMalaysia" style="display: none;">
-      <label for="nameMalaysia">Name:</label>
-      <input type="text" id="nameMalaysia" name="nameMalaysia" required>
-
-      <label for="addressMalaysia">Address:</label>
-      <input type="text" id="addressMalaysia" name="addressMalaysia" required>
-
-      <label for="workMalaysia">Work:</label>
-      <input type="text" id="workMalaysia" name="workMalaysia" required>
-
-      <label for="birthdateMalaysia">Date of Birth:</label>
-      <input type="date" id="birthdateMalaysia" name="birthdateMalaysia" required>
-
-      <label for="ageMalaysia">Age:</label>
-      <input type="number" id="ageMalaysia" name="ageMalaysia" required>
-
-      <label for="idNumberMalaysia">ID Number:</label>
-      <input type="text" id="idNumberMalaysia" name="idNumberMalaysia" required>
-    </div>
-
-    <button type="submit">Kirim</button>
-  </form>
-
-  <script>
-    function prepareEmail(event) {
-      event.preventDefault();
-
-      const name = document.getElementById('name').value;
-      const ktp = document.getElementById('ktp').value;
-      const npwp = document.getElementById('npwp').value;
-      const hp = document.getElementById('hp').value;
-      const birthdate = document.getElementById('birthdate').value;
-      const age = document.getElementById('age').value;
-      const alamat = document.getElementById('alamat').value;
-      const kota = document.getElementById('kota').value;
-      const kodepos = document.getElementById('kodepos').value;
-
-      let alamatContent = `\nAlamat: ${alamat}\nKota: ${kota}\nKode Pos: ${kodepos}`;
-
-      if (document.getElementById('alamatBerbeda').checked) {
-        const alamatDomisili = document.getElementById('alamatDomisili').value;
-        const kotaDomisili = document.getElementById('kotaDomisili').value;
-        const kodeposDomisili = document.getElementById('kodeposDomisili').value;
-        alamatContent += `\n\nAlamat Domisili: ${alamatDomisili}\nKota Domisili: ${kotaDomisili}\nKode Pos Domisili: ${kodeposDomisili}`;
-      }
-
-      const negara = document.getElementById('negara').value;
-
-      let emailContent = `Nama Pendaftar: ${name}\nNo KTP: ${ktp}\nNo NPWP: ${npwp}\nNo HP/WhatsApp: ${hp}\nTanggal Lahir: ${birthdate}\nUmur: ${age}${alamatContent}\nNegara: ${negara}`;
-
-      if (negara === 'indonesia') {
-        const jenisPendaftaran = document.getElementById('jenisPendaftaran').value;
-        emailContent += `\nJenis Pendaftaran: ${jenisPendaftaran}`;
-
-        if (jenisPendaftaran === 'creditX') {
-          const pekerjaan = document.getElementById('pekerjaan').value;
-          const pekerjaanLainnya = document.getElementById('pekerjaanLainnya').value;
-
-          emailContent += `\nPekerjaan: ${pekerjaan === 'lainnya' ? pekerjaanLainnya : pekerjaan}`;
-        }
-      } else if (negara === 'malaysia') {
-        const nameMalaysia = document.getElementById('nameMalaysia').value;
-        const addressMalaysia = document.getElementById('addressMalaysia').value;
-        const workMalaysia = document.getElementById('workMalaysia').value;
-        const birthdateMalaysia = document.getElementById('birthdateMalaysia').value;
-        const ageMalaysia = document.getElementById('ageMalaysia').value;
-        const idNumberMalaysia = document.getElementById('idNumberMalaysia').value;
-
-        emailContent += `\nName (Malaysia): ${nameMalaysia}\nAddress (Malaysia): ${addressMalaysia}\nWork (Malaysia): ${workMalaysia}\nDate of Birth (Malaysia): ${birthdateMalaysia}\nAge (Malaysia): ${ageMalaysia}\nID Number (Malaysia): ${idNumberMalaysia}`;
-      }
-
-      openEmailApp(emailContent);
-    }
-
-    function openEmailApp(content) {
-      const emailUrl = `mailto:xenzadigital@gmail.com?subject=Formulir Pendaftaran&body=${encodeURIComponent(content)}`;
-      window.location.href = emailUrl;
-    }
-
-    function toggleAlamatForm() {
-      const alamatForm = document.getElementById('alamatForm');
-      alamatForm.style.display = alamatForm.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function checkNegara() {
-      const negara = document.getElementById('negara').value;
-      const formIndonesia = document.getElementById('formIndonesia');
-      const formMalaysia = document.getElementById('formMalaysia');
-
-      if (negara === 'indonesia') {
-        formIndonesia.style.display = 'block';
-        formMalaysia.style.display = 'none';
-      } else if (negara === 'malaysia') {
-        formIndonesia.style.display = 'none';
-        formMalaysia.style.display = 'block';
-      }
-    }
-
-    function checkJenisPendaftaran() {
-      const jenisPendaftaran = document.getElementById('jenisPendaftaran').value;
-      const formPekerjaan = document.getElementById('formPekerjaan');
-      const lainnyaPekerjaan = document.getElementById('lainnyaPekerjaan');
-
-      if (jenisPendaftaran === 'creditX') {
-        formPekerjaan.style.display = 'block';
-      } else {
-        formPekerjaan.style.display = 'none';
-        lainnyaPekerjaan.style.display = 'none';
-      }
-    }
-
-    document.getElementById('pekerjaan').addEventListener('change', function() {
-      const lainnyaPekerjaan = document.getElementById('lainnyaPekerjaan');
-      const pekerjaanLainnya = document.getElementById('pekerjaanLainnya');
-
-      if (this.value === 'lainnya') {
-        lainnyaPekerjaan.style.display = 'block';
-      } else {
-        lainnyaPekerjaan.style.display = 'none';
-        pekerjaanLainnya.value = '';
-      }
-    });
-  </script>
-</body>
-</html>
+ <!-- index.html -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Formulir Pendaftaran</title>
+   <link rel="stylesheet" href="style form.css">
+ </head>
+ <body>
+   <header>
+     <div class="burger-icon" onclick="toggleMenu()">
+       <div></div>
+       <div></div>
+       <div></div>
+     </div>
+     <h1>Formulir Pendaftaran</h1>
+     <p>&copy; 2024 XENZA DIGITAL GROUP</p>
+   </header>
+ 
+   <form id="registrationForm" onsubmit="prepareEmail(event)">
+     <label for="name">Nama Sesuai KTP:</label>
+     <input type="text" id="name" name="name" required>
+ 
+     <label for="ktp">No KTP:</label>
+     <input type="text" id="ktp" name="ktp" required>
+ 
+     <label for="npwp">No NPWP (opsional):</label>
+     <input type="text" id="npwp" name="npwp">
+ 
+     <label for="hp">No HP/WhatsApp:</label>
+     <input type="tel" id="hp" name="hp" required>
+ 
+     <label for="birthdate">Tanggal Lahir:</label>
+     <input type="date" id="birthdate" name="birthdate" required>
+ 
+     <label for="age">Umur:</label>
+     <input type="number" id="age" name="age" required>
+ 
+     <label for="alamat">Alamat Sesuai KTP:</label>
+     <input type="text" id="alamat" name="alamat">
+ 
+     <label for="kota">Kota:</label>
+     <input type="text" id="kota" name="kota">
+ 
+     <label for="kodepos">Kode Pos:</label>
+     <input type="text" id="kodepos" name="kodepos">
+ 
+     <div class="checkbox">
+       <input type="checkbox" id="alamatBerbeda" onclick="toggleAlamatForm()">
+       <label for="alamatBerbeda">Centang kotak di atas jika alamat domisili berbeda dengan alamat yang ada di ktp<span>*</span></label>
+     </div>
+ 
+     <div id="alamatForm" style="display: none;">
+       <label for="alamatDomisili">Alamat Domisili:</label>
+       <input type="text" id="alamatDomisili" name="alamatDomisili">
+ 
+       <label for="kotaDomisili">Kota Domisili:</label>
+       <input type="text" id="kotaDomisili" name="kotaDomisili">
+ 
+       <label for="kodeposDomisili">Kode Pos Domisili:</label>
+       <input type="text" id="kodeposDomisili" name="kodeposDomisili">
+     </div>
+ 
+     <label for="jenisPendaftaran">Jenis Pendaftaran:</label>
+     <select id="jenisPendaftaran" name="jenisPendaftaran" onchange="checkJenisPendaftaran()" required>
+       <option value="" disabled selected>Pilih Jenis Pendaftaran</option>
+       <option value="magang">Daftar Magang</option>
+       <option value="kerja">Daftar Kerja</option>
+       <option value="creditX">Program Credit X Xenza Pay</option>
+       <option value="reseller">Program Reseller</option>
+     </select>
+ 
+     <div id="formPekerjaan" style="display: none;">
+       <label for="pekerjaan">Pekerjaan:</label>
+       <select id="pekerjaan" name="pekerjaan">
+         <option value="guru">Pilih disini</option>
+         <option value="guru">Guru</option>
+         <option value="dokter">Dokter</option>
+         <option value="pelajar">Pelajar/Mahasiswa</option>
+         <option value="karyawan_swasta">Karyawan Swasta</option>
+         <option value="wirausaha">Wirausaha</option>
+         <option value="pns">PNS (Pegawai Negeri Sipil)</option>
+         <option value="polisi">Polisi</option>
+         <option value="tukang">Tukang</option>
+         <option value="penyiar_radio_tv">Penyiar Radio/TV</option>
+         <option value="arsitek">Arsitek</option>
+         <option value="petani">Petani</option>
+         <option value="nelayan">Nelayan</option>
+         <option value="pilot">Pilot</option>
+         <option value="desainer">Desainer</option>
+         <option value="teknisi_komputer">Teknisi Komputer</option>
+         <option value="montir">Montir</option>
+         <option value="pengacara">Pengacara</option>
+         <option value="dosen">Dosen</option>
+         <option value="peneliti">Peneliti</option>
+         <option value="pedagang">Pedagang</option>
+         <option value="lainnya">Lainnya</option>
+       </select>
+ 
+       <div id="lainnyaPekerjaan" style="display: none;">
+         <label for="pekerjaanLainnya">Pekerjaan Lainnya:</label>
+         <input type="text" id="pekerjaanLainnya" name="pekerjaanLainnya">
+       </div>
+     </div>
+ 
+     <button type="submit">Kirim</button>
+   </form>
+ 
+   <script>
+     function prepareEmail(event) {
+       event.preventDefault();
+ 
+       const name = document.getElementById('name').value;
+       const ktp = document.getElementById('ktp').value;
+       const npwp = document.getElementById('npwp').value;
+       const hp = document.getElementById('hp').value;
+       const birthdate = document.getElementById('birthdate').value;
+       const age = document.getElementById('age').value;
+       const alamat = document.getElementById('alamat').value;
+       const kota = document.getElementById('kota').value;
+       const kodepos = document.getElementById('kodepos').value;
+ 
+       let alamatContent = `\nAlamat: ${alamat}\nKota: ${kota}\nKode Pos: ${kodepos}`;
+ 
+       if (document.getElementById('alamatBerbeda').checked) {
+         const alamatDomisili = document.getElementById('alamatDomisili').value;
+         const kotaDomisili = document.getElementById('kotaDomisili').value;
+         const kodeposDomisili = document.getElementById('kodeposDomisili').value;
+         alamatContent += `\n\nAlamat Domisili: ${alamatDomisili}\nKota Domisili: ${kotaDomisili}\nKode Pos Domisili: ${kodeposDomisili}`;
+       }
+ 
+       const jenisPendaftaran = document.getElementById('jenisPendaftaran').value;
+ 
+       let emailContent = `Nama Pendaftar: ${name}\nNo KTP: ${ktp}\nNo NPWP: ${npwp}\nNo HP/WhatsApp: ${hp}\nTanggal Lahir: ${birthdate}\nUmur: ${age}${alamatContent}\nJenis Pendaftaran: ${jenisPendaftaran}`;
+ 
+       if (jenisPendaftaran === 'creditX') {
+         const pekerjaan = document.getElementById('pekerjaan').value;
+         const pekerjaanLainnya = document.getElementById('pekerjaanLainnya').value;
+ 
+         emailContent += `\nPekerjaan: ${pekerjaan === 'lainnya' ? pekerjaanLainnya : pekerjaan}`;
+       }
+ 
+       openEmailApp(emailContent);
+     }
+ 
+     function openEmailApp(content) {
+       const emailUrl = `mailto:xenzadigital@gmail.com?subject=Formulir Pendaftaran&body=${encodeURIComponent(content)}`;
+       window.location.href = emailUrl;
+     }
+ 
+     function toggleAlamatForm() {
+       const alamatForm = document.getElementById('alamatForm');
+       alamatForm.style.display = alamatForm.style.display === 'none' ? 'block' : 'none';
+     }
+ 
+     function checkJenisPendaftaran() {
+       const jenisPendaftaran = document.getElementById('jenisPendaftaran').value;
+       const formPekerjaan = document.getElementById('formPekerjaan');
+       const lainnyaPekerjaan = document.getElementById('lainnyaPekerjaan');
+ 
+       if (jenisPendaftaran === 'creditX') {
+         formPekerjaan.style.display = 'block';
+       } else {
+         formPekerjaan.style.display = 'none';
+         lainnyaPekerjaan.style.display = 'none';
+       }
+     }
+ 
+     document.getElementById('pekerjaan').addEventListener('change', function() {
+       const lainnyaPekerjaan = document.getElementById('lainnyaPekerjaan');
+       const pekerjaanLainnya = document.getElementById('pekerjaanLainnya');
+ 
+       if (this.value === 'lainnya') {
+         lainnyaPekerjaan.style.display = 'block';
+       } else {
+         lainnyaPekerjaan.style.display = 'none';
+         pekerjaanLainnya.value = '';
+       }
+     });
+   </script>
+ </body>
+ </html>
+ 
